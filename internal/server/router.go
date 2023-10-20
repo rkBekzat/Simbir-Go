@@ -1,17 +1,20 @@
 package server
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+	"vtb_api/internal/handler"
+)
 
-func routing(router *gin.Engine) {
+func routing(router *gin.Engine, controller *handler.Controller) {
 	api := router.Group("/api")
 	{
 		acc := api.Group("/Account")
 		{
-			acc.GET("/Me")
-			acc.POST("/SignIn")
-			acc.POST("/SignUp")
-			acc.POST("/SignOut")
-			api.PUT("/Update")
+			acc.GET("/Me", controller.Info)
+			acc.POST("/SignIn", controller.SignIn)
+			acc.POST("/SignUp", controller.SignUp)
+			acc.POST("/SignOut", controller.SignOut)
+			api.PUT("/Update", controller.Update)
 		}
 		transport := api.Group("/Transport")
 		{
