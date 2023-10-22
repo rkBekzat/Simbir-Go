@@ -6,8 +6,11 @@ import (
 )
 
 type Authorization interface {
-	CreateUser(user entities.User) (int, error)
-	GetUser(username, password string) (entities.User, error)
+	CreateUser(user *entities.User) (int, error)
+	GetUser(username, password string) (*entities.User, error)
+	GetUserById(id int) (*entities.User, error)
+	GetUserByUsername(username string) (*entities.User, error)
+	UpdateUser(id int, username, password string) error
 }
 
 type Repo struct {

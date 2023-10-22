@@ -6,8 +6,10 @@ import (
 )
 
 type Auth interface {
-	CreateUser(user entities.User) (int, error)
+	CreateUser(user *entities.User) (int, error)
 	GenerateToken(username, password string) (string, error)
+	ParseToken(token string) (int, error)
+	Update(id int, username, password string) error
 }
 
 type UseCase struct {

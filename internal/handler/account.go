@@ -1,22 +1,28 @@
 package handler
 
 import (
+	"errors"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"vtb_api/internal/entities"
 )
 
-func (c *Controller) Info(*gin.Context) {
-	return
+func (c *Controller) Info(ctx *gin.Context) {
+	id, err := c.getUserId(ctx)
+	if err != nil {
+		NewErrorResponse(ctx, http.StatusUnauthorized, err.Error())
+		return
+	}
+	ctx.JSON(http.StatusOK, id)
 }
 
-type SignInInput struct {
+type InputUser struct {
 	Username string `json:"username" binding:"required"`
 	Password string `json:"password" binding:"required"`
 }
 
 func (c *Controller) SignIn(ctx *gin.Context) {
-	var input SignInInput
+	var input InputUser
 
 	if err := ctx.BindJSON(&input); err != nil {
 		NewErrorResponse(ctx, http.StatusBadRequest, err.Error())
@@ -41,7 +47,7 @@ func (c *Controller) SignUp(ctx *gin.Context) {
 		return
 	}
 
-	id, err := c.app.Auth.CreateUser(input)
+	id, err := c.app.Auth.CreateUser(&input)
 	if err != nil {
 		NewErrorResponse(ctx, http.StatusInternalServerError, err.Error())
 		return
@@ -51,10 +57,41 @@ func (c *Controller) SignUp(ctx *gin.Context) {
 	})
 }
 
-func (c *Controller) SignOut(*gin.Context) {
+func (c *Controller) SignOut(ctx *gin.Context) {
+	id, err := c.getUserId(ctx)
+	if err != nil {
+		NewErrorResponse(ctx, http.StatusUnauthorized, err.Error())
+		return
+	}
+	ctx.JSON(http.StatusOK, id)
 	return
 }
 
-func (c *Controller) Update(*gin.Context) {
+func (c *Controller) Update(ctx *gin.Context) {
+	id, err := c.getUserId(ctx)
+	if err != nil {
+		NewErrorResponse(ctx, http.StatusUnauthorized, err.Error())
+		return
+	}
+	var input InputUser
+	if err := ctx.BindJSON(&input); err != nil {
+		NewErrorResponse(ctx, http.StatusBadRequest, err.Error())
+		return
+	}
+	err = c.app.Update(id, input.Username, input.Password)
+	if err != nil {
+		NewErrorResponse(ctx, http.StatusBadRequest, err.Error())
+		return
+	}
+	ctx.JSON(http.StatusOK, input.Username)
 	return
+}
+
+func (c *Controller) getUserId(ctx *gin.Context) (int, error) {
+	c.UserIdentity(ctx)
+	id, ok := ctx.Get(userCtx)
+	if !ok {
+		return 0, errors.New("user id not found")
+	}
+	return id.(int), nil
 }

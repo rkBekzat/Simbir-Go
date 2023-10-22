@@ -14,7 +14,7 @@ func NewAuthPostgres(db *sqlx.DB) Authorization {
 	return &AuthPostgres{db: db}
 }
 
-func (a *AuthPostgres) CreateUser(user entities.User) (int, error) {
+func (a *AuthPostgres) CreateUser(user *entities.User) (int, error) {
 	var id int
 	query := fmt.Sprintf("INSERT INTO %s (name, username, password_hash) values ($1, $2, $3) RETURNING id", userTable)
 	row := a.db.QueryRow(query, user.Name, user.Username, user.Password)
@@ -24,9 +24,29 @@ func (a *AuthPostgres) CreateUser(user entities.User) (int, error) {
 	return id, nil
 }
 
-func (a *AuthPostgres) GetUser(username, password string) (entities.User, error) {
+func (a *AuthPostgres) GetUser(username, password string) (*entities.User, error) {
 	var user entities.User
 	query := fmt.Sprintf("SELECT id FROM %s WHERE username=$1 AND password_hash=$2", userTable)
 	err := a.db.Get(&user, query, username, password)
-	return user, err
+	return &user, err
+}
+
+func (a *AuthPostgres) GetUserById(id int) (*entities.User, error) {
+	var user entities.User
+	query := fmt.Sprintf("SELECT * FROM %s WHERE id=$1", userTable)
+	err := a.db.Get(&user, query, id)
+	return &user, err
+}
+
+func (a *AuthPostgres) GetUserByUsername(username string) (*entities.User, error) {
+	var user entities.User
+	query := fmt.Sprintf("SELECT * FROM %s WHERE username=$1", userTable)
+	err := a.db.Get(&user, query, username)
+	return &user, err
+}
+
+func (a *AuthPostgres) UpdateUser(id int, username, password string) error {
+	query := fmt.Sprintf("UPDATE %s SET username=$1 , password_hash=$2 WHERE id=$3", userTable)
+	_, err := a.db.Exec(query, username, password, id)
+	return err
 }

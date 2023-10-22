@@ -14,7 +14,7 @@ func routing(router *gin.Engine, controller *handler.Controller) {
 			acc.POST("/SignIn", controller.SignIn)
 			acc.POST("/SignUp", controller.SignUp)
 			acc.POST("/SignOut", controller.SignOut)
-			api.PUT("/Update", controller.Update)
+			acc.PUT("/Update", controller.Update)
 		}
 		transport := api.Group("/Transport")
 		{

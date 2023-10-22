@@ -2,6 +2,7 @@ package service
 
 import (
 	"crypto/sha1"
+	"errors"
 	"fmt"
 	"github.com/dgrijalva/jwt-go"
 	"time"
@@ -28,7 +29,7 @@ func NewAuthorization(repo repository.Authorization) Auth {
 	return &auth{repo: repo}
 }
 
-func (a *auth) CreateUser(user entities.User) (int, error) {
+func (a *auth) CreateUser(user *entities.User) (int, error) {
 	user.Password = generatePasswordHash(user.Password)
 	return a.repo.CreateUser(user)
 }
@@ -46,6 +47,37 @@ func (a *auth) GenerateToken(username, password string) (string, error) {
 		user.Id,
 	})
 	return token.SignedString([]byte(signingKey))
+}
+
+func (a *auth) ParseToken(accessToken string) (int, error) {
+	token, err := jwt.ParseWithClaims(accessToken, &tokenClaims{}, func(token *jwt.Token) (interface{}, error) {
+		if _, ok := token.Method.(*jwt.SigningMethodHMAC); !ok {
+			return nil, errors.New("invalid signing method")
+		}
+		return []byte(signingKey), nil
+	})
+	if err != nil {
+		return 0, err
+	}
+
+	claims, ok := token.Claims.(*tokenClaims)
+	if !ok {
+		return 0, errors.New("token claims are not of type")
+	}
+	return claims.UserId, nil
+}
+
+func (a *auth) Update(id int, username, password string) error {
+	user, _ := a.repo.GetUserById(id)
+	if user.Username == username && password == "" {
+		return errors.New("Nothing updated")
+	}
+	_, err := a.repo.GetUserByUsername(username)
+	if err != nil {
+		password = generatePasswordHash(password)
+		return a.repo.UpdateUser(id, username, password)
+	}
+	return errors.New("This username chosen by other user")
 }
 
 func generatePasswordHash(password string) string {
