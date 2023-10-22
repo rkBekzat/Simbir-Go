@@ -2,6 +2,7 @@ package handler
 
 import (
 	"errors"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"vtb_api/internal/entities"
@@ -13,7 +14,13 @@ func (c *Controller) Info(ctx *gin.Context) {
 		NewErrorResponse(ctx, http.StatusUnauthorized, err.Error())
 		return
 	}
-	ctx.JSON(http.StatusOK, id)
+	user, err := c.app.Information(id)
+	fmt.Println(user, id)
+	if err != nil {
+		NewErrorResponse(ctx, http.StatusForbidden, err.Error())
+		return
+	}
+	ctx.JSON(http.StatusOK, user)
 }
 
 type InputUser struct {

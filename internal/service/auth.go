@@ -80,6 +80,10 @@ func (a *auth) Update(id int, username, password string) error {
 	return errors.New("This username chosen by other user")
 }
 
+func (a *auth) Information(id int) (*entities.User, error) {
+	return a.repo.GetUserById(id)
+}
+
 func generatePasswordHash(password string) string {
 	hash := sha1.New()
 	hash.Write([]byte(password))

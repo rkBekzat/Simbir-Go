@@ -10,6 +10,7 @@ type Auth interface {
 	GenerateToken(username, password string) (string, error)
 	ParseToken(token string) (int, error)
 	Update(id int, username, password string) error
+	Information(id int) (*entities.User, error)
 }
 
 type UseCase struct {
