@@ -7,6 +7,7 @@ import (
 
 type Auth interface {
 	CreateUser(user entities.User) (int, error)
+	GenerateToken(username, password string) (string, error)
 }
 
 type UseCase struct {

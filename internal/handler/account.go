@@ -10,8 +10,27 @@ func (c *Controller) Info(*gin.Context) {
 	return
 }
 
-func (c *Controller) SignIn(*gin.Context) {
-	return
+type SignInInput struct {
+	Username string `json:"username" binding:"required"`
+	Password string `json:"password" binding:"required"`
+}
+
+func (c *Controller) SignIn(ctx *gin.Context) {
+	var input SignInInput
+
+	if err := ctx.BindJSON(&input); err != nil {
+		NewErrorResponse(ctx, http.StatusBadRequest, err.Error())
+		return
+	}
+
+	token, err := c.app.Auth.GenerateToken(input.Username, input.Password)
+	if err != nil {
+		NewErrorResponse(ctx, http.StatusInternalServerError, err.Error())
+		return
+	}
+	ctx.JSON(http.StatusOK, map[string]interface{}{
+		"token": token,
+	})
 }
 
 func (c *Controller) SignUp(ctx *gin.Context) {
