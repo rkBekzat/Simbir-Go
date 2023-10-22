@@ -1,11 +1,20 @@
 package repository
 
-type Repo interface {
+import (
+	"github.com/jmoiron/sqlx"
+	"vtb_api/internal/entities"
+)
+
+type Authorization interface {
+	CreateUser(user entities.User) (int, error)
 }
 
-type repo struct {
+type Repo struct {
+	Authorization
 }
 
-func NewRepo() Repo {
-	return &repo{}
+func NewRepo(db *sqlx.DB) Repo {
+	return Repo{
+		Authorization: NewAuthPostgres(db),
+	}
 }

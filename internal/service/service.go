@@ -1,8 +1,12 @@
 package service
 
-import "vtb_api/internal/repository"
+import (
+	"vtb_api/internal/entities"
+	"vtb_api/internal/repository"
+)
 
 type Auth interface {
+	CreateUser(user entities.User) (int, error)
 }
 
 type UseCase struct {
@@ -10,5 +14,7 @@ type UseCase struct {
 }
 
 func NewUseCase(repo repository.Repo) *UseCase {
-	return &UseCase{}
+	return &UseCase{
+		Auth: NewAuthorization(repo.Authorization),
+	}
 }
