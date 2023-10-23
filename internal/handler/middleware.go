@@ -1,6 +1,7 @@
 package handler
 
 import (
+	"errors"
 	"github.com/gin-gonic/gin"
 	"net/http"
 	"strings"
@@ -12,20 +13,28 @@ const (
 )
 
 func (c *Controller) UserIdentity(ctx *gin.Context) {
-	header := ctx.GetHeader(authorization)
-	if header == "" {
-		NewErrorResponse(ctx, http.StatusUnauthorized, "empty auth header")
+	token, err := c.getToken(ctx)
+	if _, ok := c.blackListToken[token]; ok {
+		NewErrorResponse(ctx, http.StatusUnauthorized, "this token expired	")
 		return
 	}
-	headerParts := strings.Split(header, " ")
-	if len(headerParts) != 2 {
-		NewErrorResponse(ctx, http.StatusUnauthorized, "invalid auth header")
-	}
 
-	userId, err := c.app.Auth.ParseToken(headerParts[1])
+	userId, err := c.app.Auth.ParseToken(token)
 	if err != nil {
 		NewErrorResponse(ctx, http.StatusUnauthorized, err.Error())
 		return
 	}
 	ctx.Set(userCtx, userId)
+}
+
+func (c *Controller) getToken(ctx *gin.Context) (string, error) {
+	header := ctx.GetHeader(authorization)
+	if header == "" {
+		return "", errors.New("empty auth header")
+	}
+	headerParts := strings.Split(header, " ")
+	if len(headerParts) != 2 {
+		return "", errors.New("invalid auth header")
+	}
+	return headerParts[1], nil
 }

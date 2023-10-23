@@ -65,12 +65,14 @@ func (c *Controller) SignUp(ctx *gin.Context) {
 }
 
 func (c *Controller) SignOut(ctx *gin.Context) {
-	id, err := c.getUserId(ctx)
+	token, err := c.getToken(ctx)
 	if err != nil {
 		NewErrorResponse(ctx, http.StatusUnauthorized, err.Error())
 		return
 	}
-	ctx.JSON(http.StatusOK, id)
+	c.blackListToken[token] = struct{}{}
+	ctx.Set(userCtx, "")
+	ctx.JSON(http.StatusOK, "ok")
 	return
 }
 
