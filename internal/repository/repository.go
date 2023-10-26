@@ -13,12 +13,21 @@ type Authorization interface {
 	UpdateUser(id int, username, password string) error
 }
 
+type Transport interface {
+	GetById(id int) (*entities.Transport, error)
+	AddTransport(t *entities.Transport) (int, error)
+	Update(id int, t *entities.Transport) error
+	Delete(id int) error
+}
+
 type Repo struct {
 	Authorization
+	Transport
 }
 
 func NewRepo(db *sqlx.DB) Repo {
 	return Repo{
 		Authorization: NewAuthPostgres(db),
+		Transport:     NewTransport(db),
 	}
 }

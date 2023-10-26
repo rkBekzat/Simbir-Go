@@ -13,12 +13,21 @@ type Auth interface {
 	Information(id int) (*entities.User, error)
 }
 
+type Transport interface {
+	GetById(id int) (*entities.Transport, error)
+	AddTransport(t *entities.Transport) (int, error)
+	Update(id int, t *entities.Transport) error
+	Delete(id int) error
+}
+
 type UseCase struct {
 	Auth
+	Transport
 }
 
 func NewUseCase(repo repository.Repo) *UseCase {
 	return &UseCase{
-		Auth: NewAuthorization(repo.Authorization),
+		Auth:      NewAuthorization(repo.Authorization),
+		Transport: NewTransport(repo.Transport),
 	}
 }

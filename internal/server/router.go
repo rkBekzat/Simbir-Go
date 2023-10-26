@@ -10,18 +10,18 @@ func routing(router *gin.Engine, controller *handler.Controller) {
 	{
 		acc := api.Group("/Account")
 		{
-			acc.GET("/Me", controller.Info)
+			acc.GET("/Me", controller.InfoUser)
 			acc.POST("/SignIn", controller.SignIn)
 			acc.POST("/SignUp", controller.SignUp)
 			acc.POST("/SignOut", controller.SignOut)
-			acc.PUT("/Update", controller.Update)
+			acc.PUT("/Update", controller.UpdateUser)
 		}
 		transport := api.Group("/Transport")
 		{
-			transport.GET("/:id")
-			transport.POST("")
-			transport.PUT("/:id")
-			transport.DELETE("/:id")
+			transport.GET("/:id", controller.InfoTransport)
+			transport.POST("", controller.CreateTransport)
+			transport.PUT("/:id", controller.UpdateTransport)
+			transport.DELETE("/:id", controller.DeleteTransport)
 		}
 		rent := api.Group("/Rent")
 		{

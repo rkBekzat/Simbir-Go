@@ -8,7 +8,7 @@ import (
 	"vtb_api/internal/entities"
 )
 
-func (c *Controller) Info(ctx *gin.Context) {
+func (c *Controller) InfoUser(ctx *gin.Context) {
 	id, err := c.getUserId(ctx)
 	if err != nil {
 		NewErrorResponse(ctx, http.StatusUnauthorized, err.Error())
@@ -76,7 +76,7 @@ func (c *Controller) SignOut(ctx *gin.Context) {
 	return
 }
 
-func (c *Controller) Update(ctx *gin.Context) {
+func (c *Controller) UpdateUser(ctx *gin.Context) {
 	id, err := c.getUserId(ctx)
 	if err != nil {
 		NewErrorResponse(ctx, http.StatusUnauthorized, err.Error())
@@ -87,7 +87,7 @@ func (c *Controller) Update(ctx *gin.Context) {
 		NewErrorResponse(ctx, http.StatusBadRequest, err.Error())
 		return
 	}
-	err = c.app.Update(id, input.Username, input.Password)
+	err = c.app.Auth.Update(id, input.Username, input.Password)
 	if err != nil {
 		NewErrorResponse(ctx, http.StatusBadRequest, err.Error())
 		return
