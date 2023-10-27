@@ -8,7 +8,8 @@ CREATE TABLE users
 
 CREATE TABLE transport
 (
-    id 
+    id serial not null unique ,
+    owner_id serial REFERENCES users(id),
     can_be_rented boolean,
     transport_type varchar,
     model varchar,

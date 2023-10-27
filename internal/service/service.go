@@ -15,9 +15,9 @@ type Auth interface {
 
 type Transport interface {
 	GetById(id int) (*entities.Transport, error)
-	AddTransport(t *entities.Transport) (int, error)
-	Update(id int, t *entities.Transport) error
-	Delete(id int) error
+	AddTransport(ownerId int, t *entities.Transport) (int, error)
+	Update(ownerId int, t *entities.Transport) error
+	Delete(ownerId, id int) error
 }
 
 type UseCase struct {
