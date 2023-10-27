@@ -20,14 +20,25 @@ type Transport interface {
 	Delete(id int) error
 }
 
+type Renting interface {
+	AccessTransport()
+	GetById(id int)
+	History()
+	TransportHistory()
+	StartRenting()
+	EndRenting()
+}
+
 type Repo struct {
 	Authorization
 	Transport
+	Renting
 }
 
 func NewRepo(db *sqlx.DB) Repo {
 	return Repo{
 		Authorization: NewAuthPostgres(db),
 		Transport:     NewTransport(db),
+		Renting:       NewRent(db),
 	}
 }

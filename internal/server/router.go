@@ -25,12 +25,12 @@ func routing(router *gin.Engine, controller *handler.Controller) {
 		}
 		rent := api.Group("/Rent")
 		{
-			rent.GET("/Transport")
-			rent.GET("/:rentId")
-			rent.GET("/MyHistory")
-			rent.GET("/TransportHistory/:transportId")
-			rent.POST("/New/:transportId")
-			rent.POST("/End/:rentId")
+			rent.GET("/Transport", controller.Transports)
+			rent.GET("/:rentId", controller.GetRentById)
+			rent.GET("/MyHistory", controller.MyHistory)
+			rent.GET("/TransportHistory/:transportId", controller.TransportHistory)
+			rent.POST("/New/:transportId", controller.RentTransport)
+			rent.POST("/End/:rentId", controller.EndRenting)
 		}
 		api.POST("/Payment/Hesoyam/:accountId")
 		admin := api.Group("/Admin")

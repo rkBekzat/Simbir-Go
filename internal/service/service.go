@@ -20,14 +20,25 @@ type Transport interface {
 	Delete(ownerId, id int) error
 }
 
+type Renting interface {
+	AccessTransport()
+	GetById()
+	History()
+	TransportHistory()
+	StartRenting()
+	EndRenting()
+}
+
 type UseCase struct {
 	Auth
 	Transport
+	Renting
 }
 
 func NewUseCase(repo repository.Repo) *UseCase {
 	return &UseCase{
 		Auth:      NewAuthorization(repo.Authorization),
 		Transport: NewTransport(repo.Transport),
+		Renting:   NewRent(),
 	}
 }

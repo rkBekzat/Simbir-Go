@@ -21,3 +21,10 @@ CREATE TABLE transport
     minute_price real,
     day_price real
 );
+
+CREATE TABLE rent_history
+(
+    id serial not null,
+    transport_id serial REFERENCES transport(id),
+    user_id serial REFERENCES users(id)
+);
