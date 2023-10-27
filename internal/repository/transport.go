@@ -34,7 +34,7 @@ func (t *transport) AddTransport(ownerId int, tr *entities.Transport) (int, erro
 }
 
 func (t *transport) Update(tr *entities.Transport) error {
-	query := fmt.Sprintf("UPDATE %s SET can_be_rented=$1, model=$2, color=$3, identifier=$4, description=$5, latitude=$6, longitude=$7, minute_price=$8, day_price=%9 ", transportTable)
+	query := fmt.Sprintf("UPDATE %s SET can_be_rented=$1, model=$2, color=$3, identifier=$4, description=$5, latitude=$6, longitude=$7, minute_price=$8, day_price=$9 ", transportTable)
 	_, err := t.db.Exec(query, tr.CanBeRented, tr.Model, tr.Color, tr.Identifier, tr.Description, tr.Latitude, tr.Longitude, tr.MinutePrice, tr.DayPrice)
 	return err
 }

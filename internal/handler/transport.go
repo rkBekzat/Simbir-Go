@@ -52,6 +52,13 @@ func (c *Controller) UpdateTransport(ctx *gin.Context) {
 		NewErrorResponse(ctx, http.StatusBadRequest, err.Error())
 		return
 	}
+	s := ctx.Param("id")
+	transportId, err := strconv.Atoi(s)
+	if err != nil {
+		NewErrorResponse(ctx, http.StatusBadRequest, err.Error())
+		return
+	}
+	tr.Id = transportId
 	err = c.app.Transport.Update(id, &tr)
 	if err != nil {
 		NewErrorResponse(ctx, http.StatusBadRequest, err.Error())
@@ -77,4 +84,5 @@ func (c *Controller) DeleteTransport(ctx *gin.Context) {
 		NewErrorResponse(ctx, http.StatusBadRequest, err.Error())
 		return
 	}
+	ctx.JSON(http.StatusOK, "transport deleted")
 }
