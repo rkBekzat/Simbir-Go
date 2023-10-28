@@ -30,11 +30,11 @@ type Renting interface {
 }
 
 type Admin interface {
-	GetAccounts()
-	GetAccountById()
-	CreateAccount()
-	UpdateAccount()
-	DeleteAccount()
+	GetAccounts(start, count int) ([]entities.User, error)
+	GetAccountById(id int) (*entities.User, error)
+	CreateAccount(user *entities.User) (int, error)
+	UpdateAccount(user *entities.User) error
+	DeleteAccount(id int) error
 }
 
 type Repo struct {
@@ -49,5 +49,6 @@ func NewRepo(db *sqlx.DB) Repo {
 		Authorization: NewAuthPostgres(db),
 		Transport:     NewTransport(db),
 		Renting:       NewRent(db),
+		Admin:         NewAdmin(db),
 	}
 }
