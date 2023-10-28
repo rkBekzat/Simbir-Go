@@ -35,6 +35,11 @@ type Admin interface {
 	CreateAccount(user *entities.User) (int, error)
 	UpdateAccount(user *entities.User) error
 	DeleteAccount(id int) error
+	GetListOfTransports()
+	GetTransportById()
+	CreateTransport()
+	UpdateTransport()
+	DeleteTransport()
 }
 
 type UseCase struct {

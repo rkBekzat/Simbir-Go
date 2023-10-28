@@ -45,11 +45,11 @@ func routing(router *gin.Engine, controller *handler.Controller) {
 			}
 			transport := admin.Group("/Transport")
 			{
-				transport.GET("")
-				transport.GET("/:id")
-				transport.POST("")
-				transport.PUT("/:id")
-				transport.DELETE("/:id")
+				transport.GET("", controller.GetTransports)
+				transport.GET("/:id", controller.GetTransportById)
+				transport.POST("", controller.AddTransport)
+				transport.PUT("/:id", controller.UpdatesTransport)
+				transport.DELETE("/:id", controller.DeletesTransport)
 			}
 			rent := admin.Group("/Rend")
 			{

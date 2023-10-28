@@ -35,6 +35,11 @@ type Admin interface {
 	CreateAccount(user *entities.User) (int, error)
 	UpdateAccount(user *entities.User) error
 	DeleteAccount(id int) error
+	GetListOfTransports(start, count int, transportType string) ([]entities.Transport, error)
+	GetTransportById(id int) (*entities.Transport, error)
+	CreateTransport(tran *entities.Transport) (int, error)
+	UpdateTransport(tran *entities.Transport) error
+	DeleteTransport(id int) error
 }
 
 type Repo struct {
