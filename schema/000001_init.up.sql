@@ -1,6 +1,8 @@
 CREATE TABLE users
 (
     id serial not null unique,
+    is_admin boolean,
+    balance integer,
     name varchar not null,
     username varchar not null  unique,
     password_hash varchar not null
@@ -26,5 +28,8 @@ CREATE TABLE rent_history
 (
     id serial not null,
     transport_id serial REFERENCES transport(id),
-    user_id serial REFERENCES users(id)
+    user_id serial REFERENCES users(id),
+    rent_type varchar,
+    started_at date,
+    ended_at date
 );

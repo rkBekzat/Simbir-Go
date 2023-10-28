@@ -18,11 +18,11 @@ func (r *rent) AccessTransport(lat, long, radius float64, tp string) ([]int, err
 	var result []int
 	query := fmt.Sprintf(
 		"SELECT id FROM %s WHERE "+
-			"(latitude BETWEEN $1 AND $2) AND"+
-			"(longtidue BETWEEN $3 AND $4) AND"+
-			"model=$5",
+			"(latitude BETWEEN $1 AND $2) AND "+
+			"(longitude BETWEEN $3 AND $4) AND "+
+			"transport_type=$5",
 		transportTable)
-	err := r.db.Select(result, query, lat-radius, lat+radius, long-radius, long+radius, tp)
+	err := r.db.Select(&result, query, lat-radius, lat+radius, long-radius, long+radius, tp)
 	return result, err
 }
 
@@ -36,14 +36,14 @@ func (r *rent) GetById(id int) (*entities.Rent, error) {
 func (r *rent) History(userId int) ([]entities.Rent, error) {
 	var result []entities.Rent
 	query := fmt.Sprintf("SELECT id, transport_id, user_id FROM %s WHERE user_id=$1", rentTable)
-	err := r.db.Select(result, query, userId)
+	err := r.db.Select(&result, query, userId)
 	return result, err
 }
 
 func (r *rent) TransportHistory(transportId int) ([]entities.Rent, error) {
 	var result []entities.Rent
 	query := fmt.Sprintf("SELECT id, transport_id, user_id FROM %s WHERE transport_id=$1", rentTable)
-	err := r.db.Select(result, query, transportId)
+	err := r.db.Select(&result, query, transportId)
 	return result, err
 }
 
@@ -62,8 +62,8 @@ func (r *rent) StartRenting(userId, transportID int) (int, error) {
 	return id, nil
 }
 
-func (r *rent) EndRenting(transportId int) error {
-	query := fmt.Sprintf("UPDATE %s SET can_be_rentend=true WHERE id=$1", transportTable)
-	_, err := r.db.Exec(query, transportId)
+func (r *rent) EndRenting(transportId int, lat, long float64) error {
+	query := fmt.Sprintf("UPDATE %s SET can_be_rentend=true, latitude=$2, longtitude=$3 WHERE id=$1", transportTable)
+	_, err := r.db.Exec(query, transportId, lat, long)
 	return err
 }

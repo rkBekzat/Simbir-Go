@@ -98,7 +98,8 @@ func (c *Controller) RentTransport(ctx *gin.Context) {
 		NewErrorResponse(ctx, http.StatusBadRequest, err.Error())
 		return
 	}
-	renting, err := c.app.Renting.StartRenting(id, tranId)
+	typerenting := ctx.Query("rentType")
+	renting, err := c.app.Renting.StartRenting(id, tranId, typerenting)
 	if err != nil {
 		NewErrorResponse(ctx, http.StatusBadRequest, err.Error())
 		return
@@ -118,5 +119,21 @@ func (c *Controller) EndRenting(ctx *gin.Context) {
 		NewErrorResponse(ctx, http.StatusBadRequest, err.Error())
 		return
 	}
-	c.app.Renting.EndRenting(id, rentId)
+	la, lo := ctx.Query("lat"), ctx.Query("long")
+	lat, err := strconv.ParseFloat(la, 64)
+	if err != nil {
+		NewErrorResponse(ctx, http.StatusBadRequest, err.Error())
+		return
+	}
+	long, err := strconv.ParseFloat(lo, 64)
+	if err != nil {
+		NewErrorResponse(ctx, http.StatusBadRequest, err.Error())
+		return
+	}
+	err = c.app.Renting.EndRenting(id, rentId, lat, long)
+	if err != nil {
+		NewErrorResponse(ctx, http.StatusBadRequest, err.Error())
+		return
+	}
+	ctx.JSON(http.StatusOK, "ok")
 }

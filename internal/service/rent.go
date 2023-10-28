@@ -52,11 +52,11 @@ func (r *rent) TransportHistory(userId, transportId int) ([]entities.Rent, error
 	return r.repo.TransportHistory(transportId)
 }
 
-func (r *rent) StartRenting(userId, transportID int) (int, error) {
+func (r *rent) StartRenting(userId, transportID int, rentType string) (int, error) {
 	return r.repo.StartRenting(userId, transportID)
 }
 
-func (r *rent) EndRenting(userId, rentId int) error {
+func (r *rent) EndRenting(userId, rentId int, lat, long float64) error {
 	renting, err := r.repo.GetById(rentId)
 	if err != nil {
 		return err
@@ -64,5 +64,5 @@ func (r *rent) EndRenting(userId, rentId int) error {
 	if renting.UserId != userId {
 		return errors.New("User Can't end the rent")
 	}
-	return r.repo.EndRenting(renting.TransportId)
+	return r.repo.EndRenting(renting.TransportId, lat, long)
 }

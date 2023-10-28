@@ -17,6 +17,6 @@ type Transport struct {
 
 type Rent struct {
 	Id          int `json:"id"`
-	TransportId int `json:"transport_id"`
-	UserId      int `json:"user_id"`
+	TransportId int `json:"transport_id" db:"transport_id"`
+	UserId      int `json:"user_id" db:"user_id"`
 }
