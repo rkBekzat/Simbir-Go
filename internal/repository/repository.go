@@ -29,10 +29,19 @@ type Renting interface {
 	EndRenting(transportId, rentId int, lat, long float64) error
 }
 
+type Admin interface {
+	GetAccounts()
+	GetAccountById()
+	CreateAccount()
+	UpdateAccount()
+	DeleteAccount()
+}
+
 type Repo struct {
 	Authorization
 	Transport
 	Renting
+	Admin
 }
 
 func NewRepo(db *sqlx.DB) Repo {

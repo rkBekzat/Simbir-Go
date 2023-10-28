@@ -37,11 +37,11 @@ func routing(router *gin.Engine, controller *handler.Controller) {
 		{
 			acc := admin.Group("/Account")
 			{
-				acc.GET("")
-				acc.GET("/:id")
-				acc.POST("")
-				acc.PUT("/:id")
-				acc.DELETE("/:id")
+				acc.GET("", controller.ListAccounts)
+				acc.GET("/:id", controller.GetAccountById)
+				acc.POST("", controller.CreateAccountByAdmin)
+				acc.PUT("/:id", controller.UpdateAccount)
+				acc.DELETE("/:id", controller.DeleteAccount)
 			}
 			transport := admin.Group("/Transport")
 			{

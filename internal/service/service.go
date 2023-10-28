@@ -29,10 +29,19 @@ type Renting interface {
 	EndRenting(userId, transportId int, lat, long float64) error
 }
 
+type Admin interface {
+	GetAccounts()
+	GetAccountById()
+	CreateAccount()
+	UpdateAccount()
+	DeleteAccount()
+}
+
 type UseCase struct {
 	Auth
 	Transport
 	Renting
+	Admin
 }
 
 func NewUseCase(repo repository.Repo) *UseCase {
