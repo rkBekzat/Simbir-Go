@@ -3,6 +3,7 @@ package repository
 import (
 	"fmt"
 	"github.com/jmoiron/sqlx"
+	"time"
 	"vtb_api/internal/entities"
 )
 
@@ -49,12 +50,13 @@ func (r *rent) TransportHistory(transportId int) ([]entities.Rent, error) {
 
 func (r *rent) StartRenting(userId, transportID int) (int, error) {
 	var id int
-	query := fmt.Sprintf("INSERT INTO %s (user_id, tranposrt_id) VALUES ($1, $2) RETURNING id", rentTable)
-	row := r.db.QueryRow(query, userId, transportID)
+	fmt.Printf("BEFORE DO SQL query, userid: %d, transportId: %d \n", userId, transportID)
+	query := fmt.Sprintf("INSERT INTO %s (transport_id, user_id, renting_ended, started_at) VALUES ($1, $2, false, $4) RETURNING id", rentTable)
+	row := r.db.QueryRow(query, transportID, userId, time.Now())
 	if err := row.Scan(&id); err != nil {
 		return 0, err
 	}
-	query = fmt.Sprintf("UPDATE %s SET can_be_rentend=false", transportTable)
+	query = fmt.Sprintf("UPDATE %s SET can_be_rented=false", transportTable)
 	_, err := r.db.Exec(query)
 	if err != nil {
 		return 0, err
@@ -62,8 +64,13 @@ func (r *rent) StartRenting(userId, transportID int) (int, error) {
 	return id, nil
 }
 
-func (r *rent) EndRenting(transportId int, lat, long float64) error {
-	query := fmt.Sprintf("UPDATE %s SET can_be_rentend=true, latitude=$2, longtitude=$3 WHERE id=$1", transportTable)
+func (r *rent) EndRenting(transportId, rentId int, lat, long float64) error {
+	query := fmt.Sprintf("UPDATE %s SET can_be_rented=true, latitude=$2, longitude=$3 WHERE id=$1", transportTable)
 	_, err := r.db.Exec(query, transportId, lat, long)
+	if err != nil {
+		return err
+	}
+	query = fmt.Sprintf("UPDATE %s SET renting_ended=true, ended_at=$1 WHERE id=$2", rentTable)
+	r.db.Exec(query, time.Now(), rentId)
 	return err
 }

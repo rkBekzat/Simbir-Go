@@ -26,10 +26,11 @@ CREATE TABLE transport
 
 CREATE TABLE rent_history
 (
-    id serial not null,
-    transport_id serial REFERENCES transport(id),
-    user_id serial REFERENCES users(id),
+    id serial not null unique ,
+    transport_id int REFERENCES transport(id) on delete cascade not null ,
+    user_id int REFERENCES users(id) on delete cascade not null ,
     rent_type varchar,
-    started_at date,
-    ended_at date
+    renting_ended boolean,
+    started_at timestamp,
+    ended_at timestamp
 );

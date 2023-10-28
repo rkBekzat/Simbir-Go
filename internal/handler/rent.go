@@ -38,7 +38,7 @@ func (c *Controller) GetRentById(ctx *gin.Context) {
 		NewErrorResponse(ctx, http.StatusUnauthorized, err.Error())
 		return
 	}
-	rentID := ctx.Param("id")
+	rentID := ctx.Param("rentId")
 	rentId, err := strconv.Atoi(rentID)
 	if err != nil {
 		NewErrorResponse(ctx, http.StatusBadRequest, err.Error())
@@ -113,7 +113,7 @@ func (c *Controller) EndRenting(ctx *gin.Context) {
 		NewErrorResponse(ctx, http.StatusUnauthorized, err.Error())
 		return
 	}
-	rId := ctx.Param("transportId")
+	rId := ctx.Param("rentId")
 	rentId, err := strconv.Atoi(rId)
 	if err != nil {
 		NewErrorResponse(ctx, http.StatusBadRequest, err.Error())

@@ -26,7 +26,7 @@ type Renting interface {
 	History(id int) ([]entities.Rent, error)
 	TransportHistory(transportId int) ([]entities.Rent, error)
 	StartRenting(userId, transportID int) (int, error)
-	EndRenting(transportId int, lat, long float64) error
+	EndRenting(transportId, rentId int, lat, long float64) error
 }
 
 type Repo struct {

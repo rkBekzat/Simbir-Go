@@ -53,6 +53,16 @@ func (r *rent) TransportHistory(userId, transportId int) ([]entities.Rent, error
 }
 
 func (r *rent) StartRenting(userId, transportID int, rentType string) (int, error) {
+	tr, err := r.repoTransport.GetById(transportID)
+	if err != nil {
+		return 0, err
+	}
+	if tr.CanBeRented == false {
+		return 0, errors.New("The car rented by other client")
+	}
+	if tr.OwnerId == userId {
+		return 0, errors.New("Owner can't rent own transport")
+	}
 	return r.repo.StartRenting(userId, transportID)
 }
 
@@ -64,5 +74,5 @@ func (r *rent) EndRenting(userId, rentId int, lat, long float64) error {
 	if renting.UserId != userId {
 		return errors.New("User Can't end the rent")
 	}
-	return r.repo.EndRenting(renting.TransportId, lat, long)
+	return r.repo.EndRenting(renting.TransportId, rentId, lat, long)
 }
