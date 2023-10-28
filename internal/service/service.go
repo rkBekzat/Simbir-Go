@@ -21,12 +21,12 @@ type Transport interface {
 }
 
 type Renting interface {
-	AccessTransport()
-	GetById()
-	History()
-	TransportHistory()
-	StartRenting()
-	EndRenting()
+	AccessTransport(lat, long, radius float64, tp string) ([]int, error)
+	GetById(userId, id int) (*entities.Rent, error)
+	History(id int) ([]entities.Rent, error)
+	TransportHistory(userId, transportId int) ([]entities.Rent, error)
+	StartRenting(userId, transportID int) (int, error)
+	EndRenting(transportId int) error
 }
 
 type UseCase struct {
@@ -39,6 +39,6 @@ func NewUseCase(repo repository.Repo) *UseCase {
 	return &UseCase{
 		Auth:      NewAuthorization(repo.Authorization),
 		Transport: NewTransport(repo.Transport),
-		Renting:   NewRent(),
+		Renting:   NewRent(repo.Renting, repo.Transport),
 	}
 }

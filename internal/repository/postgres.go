@@ -8,6 +8,7 @@ import (
 const (
 	userTable      = "users"
 	transportTable = "transport"
+	rentTable      = "rent_history"
 )
 
 type Config struct {

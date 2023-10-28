@@ -14,3 +14,9 @@ type Transport struct {
 	MinutePrice   float64 `json:"minute_price" db:"minute_price"`
 	DayPrice      float64 `json:"day_price" db:"day_price"`
 }
+
+type Rent struct {
+	Id          int `json:"id"`
+	TransportId int `json:"transport_id"`
+	UserId      int `json:"user_id"`
+}

@@ -21,12 +21,12 @@ type Transport interface {
 }
 
 type Renting interface {
-	AccessTransport()
-	GetById(id int)
-	History()
-	TransportHistory()
-	StartRenting()
-	EndRenting()
+	AccessTransport(lat, long, radius float64, tp string) ([]int, error)
+	GetById(id int) (*entities.Rent, error)
+	History(id int) ([]entities.Rent, error)
+	TransportHistory(transportId int) ([]entities.Rent, error)
+	StartRenting(userId, transportID int) (int, error)
+	EndRenting(transportId int) error
 }
 
 type Repo struct {
