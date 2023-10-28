@@ -87,9 +87,36 @@ func (c *Controller) TransportHistory(ctx *gin.Context) {
 }
 
 func (c *Controller) RentTransport(ctx *gin.Context) {
-
+	id, err := c.getUserId(ctx)
+	if err != nil {
+		NewErrorResponse(ctx, http.StatusUnauthorized, err.Error())
+		return
+	}
+	tId := ctx.Param("transportId")
+	tranId, err := strconv.Atoi(tId)
+	if err != nil {
+		NewErrorResponse(ctx, http.StatusBadRequest, err.Error())
+		return
+	}
+	renting, err := c.app.Renting.StartRenting(id, tranId)
+	if err != nil {
+		NewErrorResponse(ctx, http.StatusBadRequest, err.Error())
+		return
+	}
+	ctx.JSON(http.StatusOK, renting)
 }
 
 func (c *Controller) EndRenting(ctx *gin.Context) {
-
+	id, err := c.getUserId(ctx)
+	if err != nil {
+		NewErrorResponse(ctx, http.StatusUnauthorized, err.Error())
+		return
+	}
+	rId := ctx.Param("transportId")
+	rentId, err := strconv.Atoi(rId)
+	if err != nil {
+		NewErrorResponse(ctx, http.StatusBadRequest, err.Error())
+		return
+	}
+	c.app.Renting.EndRenting(id, rentId)
 }

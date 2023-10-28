@@ -63,7 +63,7 @@ func (r *rent) StartRenting(userId, transportID int) (int, error) {
 }
 
 func (r *rent) EndRenting(transportId int) error {
-	query := fmt.Sprintf("UPDATE %s SET can_be_rentend=true", transportTable)
-	_, err := r.db.Exec(query)
+	query := fmt.Sprintf("UPDATE %s SET can_be_rentend=true WHERE id=$1", transportTable)
+	_, err := r.db.Exec(query, transportId)
 	return err
 }

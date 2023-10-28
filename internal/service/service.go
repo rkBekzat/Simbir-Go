@@ -26,7 +26,7 @@ type Renting interface {
 	History(id int) ([]entities.Rent, error)
 	TransportHistory(userId, transportId int) ([]entities.Rent, error)
 	StartRenting(userId, transportID int) (int, error)
-	EndRenting(transportId int) error
+	EndRenting(userId, transportId int) error
 }
 
 type UseCase struct {

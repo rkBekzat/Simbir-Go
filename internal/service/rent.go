@@ -56,6 +56,13 @@ func (r *rent) StartRenting(userId, transportID int) (int, error) {
 	return r.repo.StartRenting(userId, transportID)
 }
 
-func (r *rent) EndRenting(transportId int) error {
-	return r.repo.EndRenting(transportId)
+func (r *rent) EndRenting(userId, rentId int) error {
+	renting, err := r.repo.GetById(rentId)
+	if err != nil {
+		return err
+	}
+	if renting.UserId != userId {
+		return errors.New("User Can't end the rent")
+	}
+	return r.repo.EndRenting(renting.TransportId)
 }
