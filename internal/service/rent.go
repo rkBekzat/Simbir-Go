@@ -63,7 +63,7 @@ func (r *rent) StartRenting(userId, transportID int, rentType string) (int, erro
 	if tr.OwnerId == userId {
 		return 0, errors.New("Owner can't rent own transport")
 	}
-	return r.repo.StartRenting(userId, transportID)
+	return r.repo.StartRenting(userId, transportID, rentType)
 }
 
 func (r *rent) EndRenting(userId, rentId int, lat, long float64) error {

@@ -29,14 +29,14 @@ func (r *rent) AccessTransport(lat, long, radius float64, tp string) ([]int, err
 
 func (r *rent) GetById(id int) (*entities.Rent, error) {
 	var result entities.Rent
-	query := fmt.Sprintf("SELECT id, transport_id, user_id FROM %s WHERE id=$1", rentTable)
+	query := fmt.Sprintf("SELECT id, transport_id, user_id, rent_type, renting_ended, started_at, ended_at FROM %s WHERE id=$1", rentTable)
 	err := r.db.Get(&result, query, id)
 	return &result, err
 }
 
 func (r *rent) History(userId int) ([]entities.Rent, error) {
 	var result []entities.Rent
-	query := fmt.Sprintf("SELECT id, transport_id, user_id FROM %s WHERE user_id=$1", rentTable)
+	query := fmt.Sprintf("SELECT id, transport_id, user_id, rent_type, renting_ended, started_at, ended_at FROM %s WHERE user_id=$1", rentTable)
 	err := r.db.Select(&result, query, userId)
 	return result, err
 }
@@ -48,11 +48,11 @@ func (r *rent) TransportHistory(transportId int) ([]entities.Rent, error) {
 	return result, err
 }
 
-func (r *rent) StartRenting(userId, transportID int) (int, error) {
+func (r *rent) StartRenting(userId, transportID int, rentType string) (int, error) {
 	var id int
 	fmt.Printf("BEFORE DO SQL query, userid: %d, transportId: %d \n", userId, transportID)
-	query := fmt.Sprintf("INSERT INTO %s (transport_id, user_id, renting_ended, started_at) VALUES ($1, $2, false, $4) RETURNING id", rentTable)
-	row := r.db.QueryRow(query, transportID, userId, time.Now())
+	query := fmt.Sprintf("INSERT INTO %s (transport_id, user_id, rent_type, renting_ended, started_at) VALUES ($1, $2, $3, false, $4) RETURNING id", rentTable)
+	row := r.db.QueryRow(query, transportID, userId, rentType, time.Now())
 	if err := row.Scan(&id); err != nil {
 		return 0, err
 	}

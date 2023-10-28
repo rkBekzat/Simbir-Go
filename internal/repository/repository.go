@@ -25,7 +25,7 @@ type Renting interface {
 	GetById(id int) (*entities.Rent, error)
 	History(id int) ([]entities.Rent, error)
 	TransportHistory(transportId int) ([]entities.Rent, error)
-	StartRenting(userId, transportID int) (int, error)
+	StartRenting(userId, transportID int, rentType string) (int, error)
 	EndRenting(transportId, rentId int, lat, long float64) error
 }
 

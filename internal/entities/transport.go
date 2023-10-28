@@ -16,7 +16,11 @@ type Transport struct {
 }
 
 type Rent struct {
-	Id          int `json:"id"`
-	TransportId int `json:"transport_id" db:"transport_id"`
-	UserId      int `json:"user_id" db:"user_id"`
+	Id           int     `json:"id"`
+	TransportId  int     `json:"transport_id" db:"transport_id"`
+	UserId       int     `json:"user_id" db:"user_id"`
+	RentType     string  `json:"rent_type" db:"rent_type"`
+	RentingEnded bool    `json:"renting_ended" db:"renting_ended"`
+	StartedAt    string  `json:"started_at" db:"started_at"`
+	EndedAt      *string `json:"ended_at" db:"ended_at"`
 }
