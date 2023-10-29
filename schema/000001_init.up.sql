@@ -29,8 +29,9 @@ CREATE TABLE rent_history
     id serial not null unique ,
     transport_id int REFERENCES transport(id) on delete cascade not null ,
     user_id int REFERENCES users(id) on delete cascade not null ,
-    rent_type varchar not null,
-    renting_ended boolean,
-    started_at timestamp,
-    ended_at timestamp
+    price_of_unit float not null,
+    price_type varchar,
+    time_start timestamp,
+    time_end timestamp,
+    final_price double
 );

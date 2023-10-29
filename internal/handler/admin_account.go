@@ -31,12 +31,7 @@ func (c *Controller) ListAccounts(ctx *gin.Context) {
 		return
 	}
 	st, co := ctx.Query("start"), ctx.Query("count")
-	start, err := strconv.Atoi(st)
-	if err != nil {
-		NewErrorResponse(ctx, http.StatusBadRequest, err.Error())
-		return
-	}
-	count, err := strconv.Atoi(co)
+	start, count, err := handleParameters(st, co)
 	if err != nil {
 		NewErrorResponse(ctx, http.StatusBadRequest, err.Error())
 		return

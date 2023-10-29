@@ -35,11 +35,13 @@ type Admin interface {
 	CreateAccount(user *entities.User) (int, error)
 	UpdateAccount(user *entities.User) error
 	DeleteAccount(id int) error
-	GetListOfTransports()
-	GetTransportById()
-	CreateTransport()
-	UpdateTransport()
-	DeleteTransport()
+
+	GetListOfTransports(start, count int, transportType string) ([]entities.Transport, error)
+	GetTransportById(id int) (*entities.Transport, error)
+	CreateTransport(tr *entities.Transport) (int, error)
+	UpdateTransport(tr *entities.Transport) error
+	DeleteTransport(id int) error
+
 	GetRentById(id int) (*entities.Rent, error)
 	GetUserHistory(id int) ([]entities.Rent, error)
 	GetTransportHistory(id int) ([]entities.Rent, error)

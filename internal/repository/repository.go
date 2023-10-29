@@ -35,18 +35,20 @@ type Admin interface {
 	CreateAccount(user *entities.User) (int, error)
 	UpdateAccount(user *entities.User) error
 	DeleteAccount(id int) error
+
 	GetListOfTransports(start, count int, transportType string) ([]entities.Transport, error)
 	GetTransportById(id int) (*entities.Transport, error)
 	CreateTransport(tran *entities.Transport) (int, error)
 	UpdateTransport(tran *entities.Transport) error
 	DeleteTransport(id int) error
+
 	GetRentById(id int) (*entities.Rent, error)
 	GetUserHistory(id int) ([]entities.Rent, error)
 	GetTransportHistory(id int) ([]entities.Rent, error)
-	NewRent()
-	EndRent()
-	UpdateRent()
-	DeleteRent()
+	NewRent(r *entities.Rent) (int, error)
+	EndRent(id int, finalPrice float64) error
+	UpdateRent(r entities.Rent) error
+	DeleteRent(id int) error
 }
 
 type Repo struct {
