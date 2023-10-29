@@ -51,16 +51,16 @@ func routing(router *gin.Engine, controller *handler.Controller) {
 				transport.PUT("/:id", controller.UpdatesTransport)
 				transport.DELETE("/:id", controller.DeletesTransport)
 			}
-			rent := admin.Group("/Rend")
+			rent := admin.Group("/Rent")
 			{
-				rent.GET("/:rentId")
-				rent.POST("")
-				rent.POST("/End/:rentId")
-				rent.PUT("/:id")
-				rent.DELETE("/:rentId")
+				rent.GET("/:rentId", controller.GetRentId)
+				rent.POST("", controller.AdminNewRent)
+				rent.POST("/End/:rentId", controller.AdminEndRent)
+				rent.PUT("/:id", controller.AdminUpdateRent)
+				rent.DELETE("/:rentId", controller.AdminDeleteRent)
 			}
-			admin.GET("/UserHistory/:userId")
-			admin.GET("/TransportHistory/:transportId")
+			admin.GET("/UserHistory/:userId", controller.UserHistory)
+			admin.GET("/TransportHistory/:transportId", controller.AdminTransportHistory)
 		}
 	}
 }

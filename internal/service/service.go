@@ -40,6 +40,13 @@ type Admin interface {
 	CreateTransport()
 	UpdateTransport()
 	DeleteTransport()
+	GetRentById(id int) (*entities.Rent, error)
+	GetUserHistory(id int) ([]entities.Rent, error)
+	GetTransportHistory(id int) ([]entities.Rent, error)
+	NewRent()
+	EndRent()
+	UpdateRent()
+	DeleteRent()
 }
 
 type UseCase struct {

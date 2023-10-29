@@ -40,6 +40,13 @@ type Admin interface {
 	CreateTransport(tran *entities.Transport) (int, error)
 	UpdateTransport(tran *entities.Transport) error
 	DeleteTransport(id int) error
+	GetRentById(id int) (*entities.Rent, error)
+	GetUserHistory(id int) ([]entities.Rent, error)
+	GetTransportHistory(id int) ([]entities.Rent, error)
+	NewRent()
+	EndRent()
+	UpdateRent()
+	DeleteRent()
 }
 
 type Repo struct {
