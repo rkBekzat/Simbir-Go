@@ -33,5 +33,5 @@ CREATE TABLE rent_history
     price_type varchar,
     time_start timestamp,
     time_end timestamp,
-    final_price double
+    final_price real
 );
