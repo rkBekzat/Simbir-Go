@@ -47,7 +47,7 @@ type Admin interface {
 	GetTransportHistory(id int) ([]entities.Rent, error)
 	NewRent(r *entities.Rent) (int, error)
 	EndRent(id int, finalPrice float64) error
-	UpdateRent(r entities.Rent) error
+	UpdateRent(r *entities.Rent) error
 	DeleteRent(id int) error
 }
 

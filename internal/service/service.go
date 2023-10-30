@@ -45,10 +45,10 @@ type Admin interface {
 	GetRentById(id int) (*entities.Rent, error)
 	GetUserHistory(id int) ([]entities.Rent, error)
 	GetTransportHistory(id int) ([]entities.Rent, error)
-	NewRent()
-	EndRent()
-	UpdateRent()
-	DeleteRent()
+	NewRent(r *entities.Rent) (int, error)
+	EndRent(id int, lat, long float64) error
+	UpdateRent(r *entities.Rent) error
+	DeleteRent(id int) error
 }
 
 type UseCase struct {
