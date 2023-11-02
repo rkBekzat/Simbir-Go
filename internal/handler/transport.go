@@ -12,7 +12,6 @@ import (
 // @Tags			Transport
 // @Accept			json
 // @Produce		json
-// @Param			id	path	int	true	"Transport id"
 // @Description	Get information about transport
 // @Router			/api/Transport/:id [get]
 func (c *Controller) InfoTransport(ctx *gin.Context) {

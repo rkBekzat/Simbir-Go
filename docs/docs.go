@@ -791,15 +791,6 @@ const docTemplate = `{
                     "Transport"
                 ],
                 "summary": "TransportInformation",
-                "parameters": [
-                    {
-                        "type": "integer",
-                        "description": "Transport id",
-                        "name": "id",
-                        "in": "path",
-                        "required": true
-                    }
-                ],
                 "responses": {}
             },
             "put": {

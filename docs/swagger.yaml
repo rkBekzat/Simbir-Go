@@ -568,12 +568,6 @@ paths:
       consumes:
       - application/json
       description: Get information about transport
-      parameters:
-      - description: Transport id
-        in: path
-        name: id
-        required: true
-        type: integer
       produces:
       - application/json
       responses: {}
