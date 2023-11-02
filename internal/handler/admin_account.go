@@ -25,11 +25,13 @@ func (c *Controller) isAdmin(ctx *gin.Context) error {
 	return nil
 }
 
-// @Summary Accounts
-// @Security ApKeyAuth
-// @Tags Admin
-// @Description Get the list of users
-// @Router /api/Admin/Account [get]
+//	@Summary		Accounts
+//	@Security		ApKeyAuth
+//	@Tags			Admin
+//	@Accept			json
+//	@Produce		json
+//	@Description	Get the list of users
+//	@Router			/api/Admin/Account [get]
 func (c *Controller) ListAccounts(ctx *gin.Context) {
 	err := c.isAdmin(ctx)
 	if err != nil {
@@ -49,11 +51,14 @@ func (c *Controller) ListAccounts(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, accounts)
 }
 
-// @Summary GetAccount
-// @Security ApKeyAuth
-// @Tags Admin
-// @Description Get the user by id
-// @Router /api/Admin/Account/:id [get]
+//	@Summary		GetAccount
+//	@Security		ApKeyAuth
+//	@Tags			Admin
+//	@Accept			json
+//	@Produce		json
+//	@Param			id	path	int	true	"id of user"
+//	@Description	Get the user by id
+//	@Router			/api/Admin/Account/:id [get]
 func (c *Controller) GetAccountById(ctx *gin.Context) {
 	err := c.isAdmin(ctx)
 	if err != nil {
@@ -73,11 +78,13 @@ func (c *Controller) GetAccountById(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, account)
 }
 
-// @Summary CreateUser
-// @Security ApKeyAuth
-// @Tags Admin
-// @Description Admin create the user
-// @Router /api/Admin/Account [post]
+//	@Summary		CreateUser
+//	@Security		ApKeyAuth
+//	@Tags			Admin
+//	@Accept			json
+//	@Produce		json
+//	@Description	Admin create the user
+//	@Router			/api/Admin/Account [post]
 func (c *Controller) CreateAccountByAdmin(ctx *gin.Context) {
 	err := c.isAdmin(ctx)
 	if err != nil {
@@ -95,11 +102,14 @@ func (c *Controller) CreateAccountByAdmin(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, account)
 }
 
-// @Summary UpdateAccount
-// @Security ApKeyAuth
-// @Tags Admin
-// @Description Admin update the user information
-// @Router /api/Admin/Account [put]
+//	@Summary		UpdateAccount
+//	@Security		ApKeyAuth
+//	@Tags			Admin
+//	@Accept			json
+//	@Produce		json
+//	@Param			id	path	int	true	"id of user"
+//	@Description	Admin update the user information
+//	@Router			/api/Admin/Account [put]
 func (c *Controller) UpdateAccount(ctx *gin.Context) {
 	err := c.isAdmin(ctx)
 	if err != nil {
@@ -125,11 +135,14 @@ func (c *Controller) UpdateAccount(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, "ok")
 }
 
-// @Summary DeleteUser
-// @Security ApKeyAuth
-// @Tags Admin
-// @Description Admin remove the user
-// @Router /api/Admin/Account [delete]
+//	@Summary		DeleteUser
+//	@Security		ApKeyAuth
+//	@Tags			Admin
+//	@Accept			json
+//	@Produce		json
+//	@Param			id	path	int	true	"id of user"
+//	@Description	Admin remove the user
+//	@Router			/api/Admin/Account [delete]
 func (c *Controller) DeleteAccount(ctx *gin.Context) {
 	err := c.isAdmin(ctx)
 	if err != nil {

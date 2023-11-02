@@ -19,11 +19,13 @@ func handleParameters(x, y string) (int, int, error) {
 	return a, b, nil
 }
 
-// @Summary GetTransports
-// @Security ApKeyAuth
-// @Tags Admin
-// @Description Get all transports
-// @Router /api/Admin/Transport [get]
+//	@Summary		GetTransports
+//	@Security		ApKeyAuth
+//	@Tags			Admin
+//	@Accept			json
+//	@Produce		json
+//	@Description	Get all transports
+//	@Router			/api/Admin/Transport [get]
 func (c *Controller) GetTransports(ctx *gin.Context) {
 	err := c.isAdmin(ctx)
 	if err != nil {
@@ -43,11 +45,14 @@ func (c *Controller) GetTransports(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, transports)
 }
 
-// @Summary AdminGetTransport
-// @Security ApKeyAuth
-// @Tags Admin
-// @Description Get transport by id
-// @Router /api/Admin/Transport/:id [get]
+//	@Summary		AdminGetTransport
+//	@Security		ApKeyAuth
+//	@Tags			Admin
+//	@Accept			json
+//	@Produce		json
+//	@Param			id	path	int	true	"transport id"
+//	@Description	Get transport by id
+//	@Router			/api/Admin/Transport/:id [get]
 func (c *Controller) GetTransportById(ctx *gin.Context) {
 	err := c.isAdmin(ctx)
 	if err != nil {
@@ -67,11 +72,13 @@ func (c *Controller) GetTransportById(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, transport)
 }
 
-// @Summary AdminAddTransport
-// @Security ApKeyAuth
-// @Tags Admin
-// @Description Admin add the transport
-// @Router /api/Admin/Transport [post]
+//	@Summary		AdminAddTransport
+//	@Security		ApKeyAuth
+//	@Tags			Admin
+//	@Accept			json
+//	@Produce		json
+//	@Description	Admin add the transport
+//	@Router			/api/Admin/Transport [post]
 func (c *Controller) AddTransport(ctx *gin.Context) {
 	err := c.isAdmin(ctx)
 	if err != nil {
@@ -90,11 +97,14 @@ func (c *Controller) AddTransport(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, id)
 }
 
-// @Summary AdminUpdateTransport
-// @Security ApKeyAuth
-// @Tags Admin
-// @Description Admin update the transport information
-// @Router /api/Admin/Transport/:id [put]
+//	@Summary		AdminUpdateTransport
+//	@Security		ApKeyAuth
+//	@Tags			Admin
+//	@Accept			json
+//	@Produce		json
+//	@Param			id	path	int	true	"transport id"
+//	@Description	Admin update the transport information
+//	@Router			/api/Admin/Transport/:id [put]
 func (c *Controller) UpdatesTransport(ctx *gin.Context) {
 	err := c.isAdmin(ctx)
 	if err != nil {
@@ -120,11 +130,14 @@ func (c *Controller) UpdatesTransport(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, "ok")
 }
 
-// @Summary AdminDeleteTransport
-// @Security ApKeyAuth
-// @Tags Admin
-// @Description Admin delete the transport
-// @Router /api/Admin/Transport/:id [delete]
+//	@Summary		AdminDeleteTransport
+//	@Security		ApKeyAuth
+//	@Tags			Admin
+//	@Accept			json
+//	@Produce		json
+//	@Param			id	path	int	true	"transport id"
+//	@Description	Admin delete the transport
+//	@Router			/api/Admin/Transport/:id [delete]
 func (c *Controller) DeletesTransport(ctx *gin.Context) {
 	err := c.isAdmin(ctx)
 	if err != nil {

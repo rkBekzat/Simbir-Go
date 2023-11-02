@@ -7,11 +7,14 @@ import (
 	"vtb_api/internal/entities"
 )
 
-// @Summary TransportInformation
-// @Security ApKeyAuth
-// @Tags Transport
-// @Description Get information about transport
-// @Router /api/Transport/:id [get]
+//	@Summary		TransportInformation
+//	@Security		ApKeyAuth
+//	@Tags			Transport
+//	@Accept			json
+//	@Produce		json
+//	@Param			id	path	int	true	"Transport id"
+//	@Description	Get information about transport
+//	@Router			/api/Transport/:id [get]
 func (c *Controller) InfoTransport(ctx *gin.Context) {
 	s := ctx.Param("id")
 	id, err := strconv.Atoi(s)
@@ -27,11 +30,14 @@ func (c *Controller) InfoTransport(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, tr)
 }
 
-// @Summary CreateTransport
-// @Security ApKeyAuth
-// @Tags Transport
-// @Description Create transport
-// @Router /api/Transport [post]
+//	@Summary		CreateTransport
+//	@Security		ApKeyAuth
+//	@Tags			Transport
+//	@Accept			json
+//	@Produce		json
+//	@Param			input	body	entities.Transport	true	"Transport"
+//	@Description	Create transport
+//	@Router			/api/Transport [post]
 func (c *Controller) CreateTransport(ctx *gin.Context) {
 	id, err := c.getUserId(ctx)
 	if err != nil {
@@ -51,11 +57,15 @@ func (c *Controller) CreateTransport(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, id)
 }
 
-// @Summary UpdateTransport
-// @Security ApKeyAuth
-// @Tags Transport
-// @Description Edit the Transport information
-// @Router /api/Transport/:id [put]
+//	@Summary		UpdateTransport
+//	@Security		ApKeyAuth
+//	@Tags			Transport
+//	@Accept			json
+//	@Produce		json
+//	@Param			input	body	entities.Transport	true	"Transport"
+//	@Param			id		path	int					true	"Transport id"
+//	@Description	Edit the Transport information
+//	@Router			/api/Transport/:id [put]
 func (c *Controller) UpdateTransport(ctx *gin.Context) {
 	id, err := c.getUserId(ctx)
 	if err != nil {
@@ -82,11 +92,14 @@ func (c *Controller) UpdateTransport(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, "ok")
 }
 
-// @Summary DeleteTransport
-// @Security ApKeyAuth
-// @Tags Transport
-// @Description Remove the Transport
-// @Router /api/Transport/:id [delete]
+//	@Summary		DeleteTransport
+//	@Security		ApKeyAuth
+//	@Tags			Transport
+//	@Accept			json
+//	@Produce		json
+//	@Param			id	path	int	true	"Transport id"
+//	@Description	Remove the Transport
+//	@Router			/api/Transport/:id [delete]
 func (c *Controller) DeleteTransport(ctx *gin.Context) {
 	id, err := c.getUserId(ctx)
 	if err != nil {

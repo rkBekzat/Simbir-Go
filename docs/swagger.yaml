@@ -1,0 +1,646 @@
+basePath: /
+definitions:
+  entities.Transport:
+    properties:
+      can_be_rented:
+        type: boolean
+      color:
+        type: string
+      day_price:
+        type: number
+      description:
+        type: string
+      id:
+        type: integer
+      identifier:
+        type: string
+      latitude:
+        type: number
+      longitude:
+        type: number
+      minute_price:
+        type: number
+      model:
+        type: string
+      owner_id:
+        type: integer
+      transport_type:
+        type: string
+    type: object
+  entities.User:
+    properties:
+      balance:
+        type: integer
+      is_admin:
+        type: boolean
+      name:
+        type: string
+      password:
+        type: string
+      username:
+        type: string
+    required:
+    - password
+    - username
+    type: object
+  handler.InputUser:
+    properties:
+      password:
+        type: string
+      username:
+        type: string
+    required:
+    - password
+    - username
+    type: object
+host: localhost:8000
+info:
+  contact: {}
+  description: WEB API
+  title: Rent Transport
+  version: "1.0"
+paths:
+  /api/Account/Me:
+    get:
+      consumes:
+      - application/json
+      description: Get information current User
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApKeyAuth: []
+      summary: Information
+      tags:
+      - Account
+  /api/Account/SignIn:
+    post:
+      consumes:
+      - application/json
+      description: login
+      parameters:
+      - description: credentials
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/handler.InputUser'
+      produces:
+      - application/json
+      responses: {}
+      summary: SignIn
+      tags:
+      - Account
+  /api/Account/SignOut:
+    post:
+      consumes:
+      - application/json
+      description: Logout
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApKeyAuth: []
+      summary: SignOut
+      tags:
+      - Account
+  /api/Account/SignUp:
+    post:
+      consumes:
+      - application/json
+      description: Create account
+      parameters:
+      - description: account info
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/entities.User'
+      produces:
+      - application/json
+      responses: {}
+      summary: SignUp
+      tags:
+      - Account
+  /api/Account/Update:
+    put:
+      consumes:
+      - application/json
+      description: Edit the user information
+      parameters:
+      - description: Update account
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/handler.InputUser'
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApKeyAuth: []
+      summary: Update
+      tags:
+      - Account
+  /api/Admin/Account:
+    delete:
+      consumes:
+      - application/json
+      description: Admin remove the user
+      parameters:
+      - description: id of user
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApKeyAuth: []
+      summary: DeleteUser
+      tags:
+      - Admin
+    get:
+      consumes:
+      - application/json
+      description: Get the list of users
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApKeyAuth: []
+      summary: Accounts
+      tags:
+      - Admin
+    post:
+      consumes:
+      - application/json
+      description: Admin create the user
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApKeyAuth: []
+      summary: CreateUser
+      tags:
+      - Admin
+    put:
+      consumes:
+      - application/json
+      description: Admin update the user information
+      parameters:
+      - description: id of user
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApKeyAuth: []
+      summary: UpdateAccount
+      tags:
+      - Admin
+  /api/Admin/Account/:id:
+    get:
+      consumes:
+      - application/json
+      description: Get the user by id
+      parameters:
+      - description: id of user
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApKeyAuth: []
+      summary: GetAccount
+      tags:
+      - Admin
+  /api/Admin/Rent:
+    post:
+      consumes:
+      - application/json
+      description: Create new rent
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApKeyAuth: []
+      summary: AdminNewRent
+      tags:
+      - Admin
+  /api/Admin/Rent/:id:
+    put:
+      consumes:
+      - application/json
+      description: Update the rent
+      parameters:
+      - description: rent id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApKeyAuth: []
+      summary: AdminUpdateRent
+      tags:
+      - Admin
+  /api/Admin/Rent/:rentId:
+    delete:
+      consumes:
+      - application/json
+      description: Delete the rent
+      parameters:
+      - description: rent id
+        in: path
+        name: rentId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApKeyAuth: []
+      summary: AdminDeleteRent
+      tags:
+      - Admin
+    get:
+      consumes:
+      - application/json
+      description: Get rent by id
+      parameters:
+      - description: rent id
+        in: path
+        name: rentId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApKeyAuth: []
+      summary: AdminGetRent
+      tags:
+      - Admin
+  /api/Admin/Rent/End/:rentId:
+    post:
+      consumes:
+      - application/json
+      description: End the rent
+      parameters:
+      - description: rent id
+        in: path
+        name: rentId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApKeyAuth: []
+      summary: AdminEndRent
+      tags:
+      - Admin
+  /api/Admin/Transport:
+    get:
+      consumes:
+      - application/json
+      description: Get all transports
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApKeyAuth: []
+      summary: GetTransports
+      tags:
+      - Admin
+    post:
+      consumes:
+      - application/json
+      description: Admin add the transport
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApKeyAuth: []
+      summary: AdminAddTransport
+      tags:
+      - Admin
+  /api/Admin/Transport/:id:
+    delete:
+      consumes:
+      - application/json
+      description: Admin delete the transport
+      parameters:
+      - description: transport id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApKeyAuth: []
+      summary: AdminDeleteTransport
+      tags:
+      - Admin
+    get:
+      consumes:
+      - application/json
+      description: Get transport by id
+      parameters:
+      - description: transport id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApKeyAuth: []
+      summary: AdminGetTransport
+      tags:
+      - Admin
+    put:
+      consumes:
+      - application/json
+      description: Admin update the transport information
+      parameters:
+      - description: transport id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApKeyAuth: []
+      summary: AdminUpdateTransport
+      tags:
+      - Admin
+  /api/Rent/:rentId:
+    get:
+      consumes:
+      - application/json
+      description: Get rent by id
+      parameters:
+      - description: rent id
+        in: path
+        name: rentId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApKeyAuth: []
+      summary: GetRent
+      tags:
+      - Rent
+  /api/Rent/End/:rentId:
+    post:
+      consumes:
+      - application/json
+      description: End renting
+      parameters:
+      - description: rent id
+        in: path
+        name: rentId
+        required: true
+        type: integer
+      - description: latitude of tranposrt
+        in: query
+        name: lat
+        required: true
+        type: string
+      - description: longitude of tranposrt
+        in: query
+        name: long
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApKeyAuth: []
+      summary: End
+      tags:
+      - Rent
+  /api/Rent/MyHistory:
+    get:
+      consumes:
+      - application/json
+      description: Get the user history of rents
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApKeyAuth: []
+      summary: MyHistory
+      tags:
+      - Rent
+  /api/Rent/New/:transportId:
+    post:
+      consumes:
+      - application/json
+      description: Start renting
+      parameters:
+      - description: Tranport id
+        in: path
+        name: transportId
+        required: true
+        type: integer
+      - description: 'type of renting: minutes or days'
+        in: query
+        name: rentType
+        type: string
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApKeyAuth: []
+      summary: StartRent
+      tags:
+      - Rent
+  /api/Rent/Transport:
+    get:
+      consumes:
+      - application/json
+      description: Get transport which not far than radius from point
+      parameters:
+      - description: latitude of point
+        in: query
+        name: lat
+        required: true
+        type: string
+      - description: longitude of point
+        in: query
+        name: long
+        required: true
+        type: string
+      - description: radius
+        in: query
+        name: radius
+        required: true
+        type: string
+      - description: type of transport
+        in: query
+        name: type
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses: {}
+      summary: GetTransport
+      tags:
+      - Rent
+  /api/Rent/TransportHistory/:trnaposrtId:
+    get:
+      consumes:
+      - application/json
+      description: Get history of transport
+      parameters:
+      - description: transport id
+        in: path
+        name: transportId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApKeyAuth: []
+      summary: TranposrtHistory
+      tags:
+      - Rent
+  /api/Transport:
+    post:
+      consumes:
+      - application/json
+      description: Create transport
+      parameters:
+      - description: Transport
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/entities.Transport'
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApKeyAuth: []
+      summary: CreateTransport
+      tags:
+      - Transport
+  /api/Transport/:id:
+    delete:
+      consumes:
+      - application/json
+      description: Remove the Transport
+      parameters:
+      - description: Transport id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApKeyAuth: []
+      summary: DeleteTransport
+      tags:
+      - Transport
+    get:
+      consumes:
+      - application/json
+      description: Get information about transport
+      parameters:
+      - description: Transport id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApKeyAuth: []
+      summary: TransportInformation
+      tags:
+      - Transport
+    put:
+      consumes:
+      - application/json
+      description: Edit the Transport information
+      parameters:
+      - description: Transport
+        in: body
+        name: input
+        required: true
+        schema:
+          $ref: '#/definitions/entities.Transport'
+      - description: Transport id
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApKeyAuth: []
+      summary: UpdateTransport
+      tags:
+      - Transport
+  /api/TransportHistory/:transportId:
+    get:
+      consumes:
+      - application/json
+      description: Get  transport history
+      parameters:
+      - description: transport id
+        in: path
+        name: transportId
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApKeyAuth: []
+      summary: AdminGetTransportHitory
+      tags:
+      - Admin
+  /api/UserHistory/:userId:
+    get:
+      consumes:
+      - application/json
+      description: Get user history
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApKeyAuth: []
+      summary: AdminGetUserHistory
+      tags:
+      - Admin
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
