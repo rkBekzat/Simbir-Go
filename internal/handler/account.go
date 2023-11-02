@@ -8,6 +8,11 @@ import (
 	"vtb_api/internal/entities"
 )
 
+// @Summary Information
+// @Security ApKeyAuth
+// @Tags Account
+// @Description Get information current User
+// @Router /api/Account/Me [get]
 func (c *Controller) InfoUser(ctx *gin.Context) {
 	id, err := c.getUserId(ctx)
 	if err != nil {
@@ -28,6 +33,11 @@ type InputUser struct {
 	Password string `json:"password" binding:"required"`
 }
 
+// @Summary SignIn
+// @Tags Account
+// @Description login
+// @Param input body InputUser true "credentials"
+// @Router /api/Account/SignIn [post]
 func (c *Controller) SignIn(ctx *gin.Context) {
 	var input InputUser
 
@@ -46,6 +56,11 @@ func (c *Controller) SignIn(ctx *gin.Context) {
 	})
 }
 
+// @Summary SignUp
+// @Tags Account
+// @Param input body entities.User true "account info"
+// @Description Create account
+// @Router /api/Account/SignUp [post]
 func (c *Controller) SignUp(ctx *gin.Context) {
 	var input entities.User
 
@@ -64,6 +79,11 @@ func (c *Controller) SignUp(ctx *gin.Context) {
 	})
 }
 
+// @Summary SignOut
+// @Security ApKeyAuth
+// @Tags Account
+// @Description Logout
+// @Router /api/Account/SignOut [post]
 func (c *Controller) SignOut(ctx *gin.Context) {
 	token, err := c.getToken(ctx)
 	if err != nil {
@@ -76,6 +96,11 @@ func (c *Controller) SignOut(ctx *gin.Context) {
 	return
 }
 
+// @Summary Update
+// @Security ApKeyAuth
+// @Tags Account
+// @Description Edit the user information
+// @Router /api/Account/Update [put]
 func (c *Controller) UpdateUser(ctx *gin.Context) {
 	id, err := c.getUserId(ctx)
 	if err != nil {

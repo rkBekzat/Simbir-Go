@@ -13,6 +13,17 @@ import (
 	"vtb_api/internal/service"
 )
 
+// @title Rent Transport
+// @version 1.0
+// @description WEB API
+
+// @host localhost:8000
+// @basePath /
+
+// @securityDefinitions.apikey ApiKeyAuth
+// @in header
+// @name Authorization
+
 func main() {
 	logrus.SetFormatter(&logrus.JSONFormatter{})
 	if err := initConfig(); err != nil {
