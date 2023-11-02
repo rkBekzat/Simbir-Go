@@ -7,14 +7,14 @@ import (
 	"vtb_api/internal/entities"
 )
 
-//	@Summary		AdminGetRent
-//	@Security		ApKeyAuth
-//	@Tags			Admin
-//	@Accept			json
-//	@Produce		json
-//	@Param			rentId	path	int	true	"rent id"
-//	@Description	Get rent by id
-//	@Router			/api/Admin/Rent/:rentId [get]
+// @Summary		AdminGetRent
+// @Security		ApiKeyAuth
+// @Tags			Admin
+// @Accept			json
+// @Produce		json
+// @Param			rentId	path	int	true	"rent id"
+// @Description	Get rent by id
+// @Router			/api/Admin/Rent/:rentId [get]
 func (c *Controller) GetRentId(ctx *gin.Context) {
 	err := c.isAdmin(ctx)
 	if err != nil {
@@ -34,13 +34,13 @@ func (c *Controller) GetRentId(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, r)
 }
 
-//	@Summary		AdminGetUserHistory
-//	@Security		ApKeyAuth
-//	@Tags			Admin
-//	@Accept			json
-//	@Produce		json
-//	@Description	Get user history
-//	@Router			/api/UserHistory/:userId [get]
+// @Summary		AdminGetUserHistory
+// @Security		ApiKeyAuth
+// @Tags			Admin
+// @Accept			json
+// @Produce		json
+// @Description	Get user history
+// @Router			/api/UserHistory/:userId [get]
 func (c *Controller) UserHistory(ctx *gin.Context) {
 	err := c.isAdmin(ctx)
 	if err != nil {
@@ -60,14 +60,14 @@ func (c *Controller) UserHistory(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, history)
 }
 
-//	@Summary		AdminGetTransportHitory
-//	@Security		ApKeyAuth
-//	@Tags			Admin
-//	@Accept			json
-//	@Produce		json
-//	@Param			transportId	path	int	true	"transport id"
-//	@Description	Get  transport history
-//	@Router			/api/TransportHistory/:transportId [get]
+// @Summary		AdminGetTransportHitory
+// @Security		ApiKeyAuth
+// @Tags			Admin
+// @Accept			json
+// @Produce		json
+// @Param			transportId	path	int	true	"transport id"
+// @Description	Get  transport history
+// @Router			/api/TransportHistory/:transportId [get]
 func (c *Controller) AdminTransportHistory(ctx *gin.Context) {
 	err := c.isAdmin(ctx)
 	if err != nil {
@@ -87,13 +87,13 @@ func (c *Controller) AdminTransportHistory(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, history)
 }
 
-//	@Summary		AdminNewRent
-//	@Security		ApKeyAuth
-//	@Tags			Admin
-//	@Accept			json
-//	@Produce		json
-//	@Description	Create new rent
-//	@Router			/api/Admin/Rent [post]
+// @Summary		AdminNewRent
+// @Security		ApiKeyAuth
+// @Tags			Admin
+// @Accept			json
+// @Produce		json
+// @Description	Create new rent
+// @Router			/api/Admin/Rent [post]
 func (c *Controller) AdminNewRent(ctx *gin.Context) {
 	err := c.isAdmin(ctx)
 	if err != nil {
@@ -112,14 +112,14 @@ func (c *Controller) AdminNewRent(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, id)
 }
 
-//	@Summary		AdminEndRent
-//	@Security		ApKeyAuth
-//	@Tags			Admin
-//	@Accept			json
-//	@Produce		json
-//	@Param			rentId	path	int	true	"rent id"
-//	@Description	End the rent
-//	@Router			/api/Admin/Rent/End/:rentId [post]
+// @Summary		AdminEndRent
+// @Security		ApiKeyAuth
+// @Tags			Admin
+// @Accept			json
+// @Produce		json
+// @Param			rentId	path	int	true	"rent id"
+// @Description	End the rent
+// @Router			/api/Admin/Rent/End/:rentId [post]
 func (c *Controller) AdminEndRent(ctx *gin.Context) {
 	err := c.isAdmin(ctx)
 	if err != nil {
@@ -150,14 +150,14 @@ func (c *Controller) AdminEndRent(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, "ok")
 }
 
-//	@Summary		AdminUpdateRent
-//	@Security		ApKeyAuth
-//	@Tags			Admin
-//	@Accept			json
-//	@Produce		json
-//	@Param			id	path	int	true	"rent id"
-//	@Description	Update the rent
-//	@Router			/api/Admin/Rent/:id [put]
+// @Summary		AdminUpdateRent
+// @Security		ApiKeyAuth
+// @Tags			Admin
+// @Accept			json
+// @Produce		json
+// @Param			id	path	int	true	"rent id"
+// @Description	Update the rent
+// @Router			/api/Admin/Rent/:id [put]
 func (c *Controller) AdminUpdateRent(ctx *gin.Context) {
 	err := c.isAdmin(ctx)
 	if err != nil {
@@ -183,14 +183,14 @@ func (c *Controller) AdminUpdateRent(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, "ok")
 }
 
-//	@Summary		AdminDeleteRent
-//	@Security		ApKeyAuth
-//	@Tags			Admin
-//	@Accept			json
-//	@Produce		json
-//	@Param			rentId	path	int	true	"rent id"
-//	@Description	Delete the rent
-//	@Router			/api/Admin/Rent/:rentId [delete]
+// @Summary		AdminDeleteRent
+// @Security		ApiKeyAuth
+// @Tags			Admin
+// @Accept			json
+// @Produce		json
+// @Param			rentId	path	int	true	"rent id"
+// @Description	Delete the rent
+// @Router			/api/Admin/Rent/:rentId [delete]
 func (c *Controller) AdminDeleteRent(ctx *gin.Context) {
 	err := c.isAdmin(ctx)
 	if err != nil {

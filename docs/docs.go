@@ -19,7 +19,7 @@ const docTemplate = `{
             "get": {
                 "security": [
                     {
-                        "ApKeyAuth": []
+                        "ApiKeyAuth": []
                     }
                 ],
                 "description": "Get information current User",
@@ -115,7 +115,7 @@ const docTemplate = `{
             "put": {
                 "security": [
                     {
-                        "ApKeyAuth": []
+                        "ApiKeyAuth": []
                     }
                 ],
                 "description": "Edit the user information",
@@ -147,7 +147,7 @@ const docTemplate = `{
             "get": {
                 "security": [
                     {
-                        "ApKeyAuth": []
+                        "ApiKeyAuth": []
                     }
                 ],
                 "description": "Get the list of users",
@@ -166,7 +166,7 @@ const docTemplate = `{
             "put": {
                 "security": [
                     {
-                        "ApKeyAuth": []
+                        "ApiKeyAuth": []
                     }
                 ],
                 "description": "Admin update the user information",
@@ -194,7 +194,7 @@ const docTemplate = `{
             "post": {
                 "security": [
                     {
-                        "ApKeyAuth": []
+                        "ApiKeyAuth": []
                     }
                 ],
                 "description": "Admin create the user",
@@ -213,7 +213,7 @@ const docTemplate = `{
             "delete": {
                 "security": [
                     {
-                        "ApKeyAuth": []
+                        "ApiKeyAuth": []
                     }
                 ],
                 "description": "Admin remove the user",
@@ -243,7 +243,7 @@ const docTemplate = `{
             "get": {
                 "security": [
                     {
-                        "ApKeyAuth": []
+                        "ApiKeyAuth": []
                     }
                 ],
                 "description": "Get the user by id",
@@ -273,7 +273,7 @@ const docTemplate = `{
             "post": {
                 "security": [
                     {
-                        "ApKeyAuth": []
+                        "ApiKeyAuth": []
                     }
                 ],
                 "description": "Create new rent",
@@ -294,7 +294,7 @@ const docTemplate = `{
             "put": {
                 "security": [
                     {
-                        "ApKeyAuth": []
+                        "ApiKeyAuth": []
                     }
                 ],
                 "description": "Update the rent",
@@ -324,7 +324,7 @@ const docTemplate = `{
             "get": {
                 "security": [
                     {
-                        "ApKeyAuth": []
+                        "ApiKeyAuth": []
                     }
                 ],
                 "description": "Get rent by id",
@@ -352,7 +352,7 @@ const docTemplate = `{
             "delete": {
                 "security": [
                     {
-                        "ApKeyAuth": []
+                        "ApiKeyAuth": []
                     }
                 ],
                 "description": "Delete the rent",
@@ -382,7 +382,7 @@ const docTemplate = `{
             "post": {
                 "security": [
                     {
-                        "ApKeyAuth": []
+                        "ApiKeyAuth": []
                     }
                 ],
                 "description": "End the rent",
@@ -412,7 +412,7 @@ const docTemplate = `{
             "get": {
                 "security": [
                     {
-                        "ApKeyAuth": []
+                        "ApiKeyAuth": []
                     }
                 ],
                 "description": "Get all transports",
@@ -431,7 +431,7 @@ const docTemplate = `{
             "post": {
                 "security": [
                     {
-                        "ApKeyAuth": []
+                        "ApiKeyAuth": []
                     }
                 ],
                 "description": "Admin add the transport",
@@ -452,7 +452,7 @@ const docTemplate = `{
             "get": {
                 "security": [
                     {
-                        "ApKeyAuth": []
+                        "ApiKeyAuth": []
                     }
                 ],
                 "description": "Get transport by id",
@@ -480,7 +480,7 @@ const docTemplate = `{
             "put": {
                 "security": [
                     {
-                        "ApKeyAuth": []
+                        "ApiKeyAuth": []
                     }
                 ],
                 "description": "Admin update the transport information",
@@ -508,7 +508,7 @@ const docTemplate = `{
             "delete": {
                 "security": [
                     {
-                        "ApKeyAuth": []
+                        "ApiKeyAuth": []
                     }
                 ],
                 "description": "Admin delete the transport",
@@ -538,7 +538,7 @@ const docTemplate = `{
             "get": {
                 "security": [
                     {
-                        "ApKeyAuth": []
+                        "ApiKeyAuth": []
                     }
                 ],
                 "description": "Get rent by id",
@@ -568,7 +568,7 @@ const docTemplate = `{
             "post": {
                 "security": [
                     {
-                        "ApKeyAuth": []
+                        "ApiKeyAuth": []
                     }
                 ],
                 "description": "End renting",
@@ -612,7 +612,7 @@ const docTemplate = `{
             "get": {
                 "security": [
                     {
-                        "ApKeyAuth": []
+                        "ApiKeyAuth": []
                     }
                 ],
                 "description": "Get the user history of rents",
@@ -633,7 +633,7 @@ const docTemplate = `{
             "post": {
                 "security": [
                     {
-                        "ApKeyAuth": []
+                        "ApiKeyAuth": []
                     }
                 ],
                 "description": "Start renting",
@@ -715,7 +715,7 @@ const docTemplate = `{
             "get": {
                 "security": [
                     {
-                        "ApKeyAuth": []
+                        "ApiKeyAuth": []
                     }
                 ],
                 "description": "Get history of transport",
@@ -745,7 +745,7 @@ const docTemplate = `{
             "post": {
                 "security": [
                     {
-                        "ApKeyAuth": []
+                        "ApiKeyAuth": []
                     }
                 ],
                 "description": "Create transport",
@@ -777,7 +777,7 @@ const docTemplate = `{
             "get": {
                 "security": [
                     {
-                        "ApKeyAuth": []
+                        "ApiKeyAuth": []
                     }
                 ],
                 "description": "Get information about transport",
@@ -805,7 +805,7 @@ const docTemplate = `{
             "put": {
                 "security": [
                     {
-                        "ApKeyAuth": []
+                        "ApiKeyAuth": []
                     }
                 ],
                 "description": "Edit the Transport information",
@@ -842,7 +842,7 @@ const docTemplate = `{
             "delete": {
                 "security": [
                     {
-                        "ApKeyAuth": []
+                        "ApiKeyAuth": []
                     }
                 ],
                 "description": "Remove the Transport",
@@ -872,7 +872,7 @@ const docTemplate = `{
             "get": {
                 "security": [
                     {
-                        "ApKeyAuth": []
+                        "ApiKeyAuth": []
                     }
                 ],
                 "description": "Get  transport history",
@@ -902,7 +902,7 @@ const docTemplate = `{
             "get": {
                 "security": [
                     {
-                        "ApKeyAuth": []
+                        "ApiKeyAuth": []
                     }
                 ],
                 "description": "Get user history",

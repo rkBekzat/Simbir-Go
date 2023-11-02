@@ -3,9 +3,15 @@ package server
 import (
 	"github.com/gin-gonic/gin"
 	"vtb_api/internal/handler"
+
+	swaggerFiles "github.com/swaggo/files"
+	"github.com/swaggo/gin-swagger"
+
+	_ "vtb_api/docs"
 )
 
 func routing(router *gin.Engine, controller *handler.Controller) {
+	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler))
 	api := router.Group("/api")
 	{
 		acc := api.Group("/Account")

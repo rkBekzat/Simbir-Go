@@ -3,7 +3,6 @@ package handler
 import (
 	"errors"
 	"github.com/gin-gonic/gin"
-	"net/http"
 	"strings"
 )
 
@@ -12,19 +11,18 @@ const (
 	userCtx       = "userId"
 )
 
-func (c *Controller) UserIdentity(ctx *gin.Context) {
+func (c *Controller) UserIdentity(ctx *gin.Context) error {
 	token, err := c.getToken(ctx)
 	if _, ok := c.blackListToken[token]; ok {
-		NewErrorResponse(ctx, http.StatusUnauthorized, "this token expired	")
-		return
+		return errors.New("this token expired")
 	}
 
 	userId, err := c.app.Auth.ParseToken(token)
 	if err != nil {
-		NewErrorResponse(ctx, http.StatusUnauthorized, err.Error())
-		return
+		return err
 	}
 	ctx.Set(userCtx, userId)
+	return nil
 }
 
 func (c *Controller) getToken(ctx *gin.Context) (string, error) {

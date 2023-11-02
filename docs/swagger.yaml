@@ -69,7 +69,7 @@ paths:
       - application/json
       responses: {}
       security:
-      - ApKeyAuth: []
+      - ApiKeyAuth: []
       summary: Information
       tags:
       - Account
@@ -138,7 +138,7 @@ paths:
       - application/json
       responses: {}
       security:
-      - ApKeyAuth: []
+      - ApiKeyAuth: []
       summary: Update
       tags:
       - Account
@@ -157,7 +157,7 @@ paths:
       - application/json
       responses: {}
       security:
-      - ApKeyAuth: []
+      - ApiKeyAuth: []
       summary: DeleteUser
       tags:
       - Admin
@@ -169,7 +169,7 @@ paths:
       - application/json
       responses: {}
       security:
-      - ApKeyAuth: []
+      - ApiKeyAuth: []
       summary: Accounts
       tags:
       - Admin
@@ -181,7 +181,7 @@ paths:
       - application/json
       responses: {}
       security:
-      - ApKeyAuth: []
+      - ApiKeyAuth: []
       summary: CreateUser
       tags:
       - Admin
@@ -199,7 +199,7 @@ paths:
       - application/json
       responses: {}
       security:
-      - ApKeyAuth: []
+      - ApiKeyAuth: []
       summary: UpdateAccount
       tags:
       - Admin
@@ -218,7 +218,7 @@ paths:
       - application/json
       responses: {}
       security:
-      - ApKeyAuth: []
+      - ApiKeyAuth: []
       summary: GetAccount
       tags:
       - Admin
@@ -231,7 +231,7 @@ paths:
       - application/json
       responses: {}
       security:
-      - ApKeyAuth: []
+      - ApiKeyAuth: []
       summary: AdminNewRent
       tags:
       - Admin
@@ -250,7 +250,7 @@ paths:
       - application/json
       responses: {}
       security:
-      - ApKeyAuth: []
+      - ApiKeyAuth: []
       summary: AdminUpdateRent
       tags:
       - Admin
@@ -269,7 +269,7 @@ paths:
       - application/json
       responses: {}
       security:
-      - ApKeyAuth: []
+      - ApiKeyAuth: []
       summary: AdminDeleteRent
       tags:
       - Admin
@@ -287,7 +287,7 @@ paths:
       - application/json
       responses: {}
       security:
-      - ApKeyAuth: []
+      - ApiKeyAuth: []
       summary: AdminGetRent
       tags:
       - Admin
@@ -306,7 +306,7 @@ paths:
       - application/json
       responses: {}
       security:
-      - ApKeyAuth: []
+      - ApiKeyAuth: []
       summary: AdminEndRent
       tags:
       - Admin
@@ -319,7 +319,7 @@ paths:
       - application/json
       responses: {}
       security:
-      - ApKeyAuth: []
+      - ApiKeyAuth: []
       summary: GetTransports
       tags:
       - Admin
@@ -331,7 +331,7 @@ paths:
       - application/json
       responses: {}
       security:
-      - ApKeyAuth: []
+      - ApiKeyAuth: []
       summary: AdminAddTransport
       tags:
       - Admin
@@ -350,7 +350,7 @@ paths:
       - application/json
       responses: {}
       security:
-      - ApKeyAuth: []
+      - ApiKeyAuth: []
       summary: AdminDeleteTransport
       tags:
       - Admin
@@ -368,7 +368,7 @@ paths:
       - application/json
       responses: {}
       security:
-      - ApKeyAuth: []
+      - ApiKeyAuth: []
       summary: AdminGetTransport
       tags:
       - Admin
@@ -386,7 +386,7 @@ paths:
       - application/json
       responses: {}
       security:
-      - ApKeyAuth: []
+      - ApiKeyAuth: []
       summary: AdminUpdateTransport
       tags:
       - Admin
@@ -405,7 +405,7 @@ paths:
       - application/json
       responses: {}
       security:
-      - ApKeyAuth: []
+      - ApiKeyAuth: []
       summary: GetRent
       tags:
       - Rent
@@ -434,7 +434,7 @@ paths:
       - application/json
       responses: {}
       security:
-      - ApKeyAuth: []
+      - ApiKeyAuth: []
       summary: End
       tags:
       - Rent
@@ -447,7 +447,7 @@ paths:
       - application/json
       responses: {}
       security:
-      - ApKeyAuth: []
+      - ApiKeyAuth: []
       summary: MyHistory
       tags:
       - Rent
@@ -470,7 +470,7 @@ paths:
       - application/json
       responses: {}
       security:
-      - ApKeyAuth: []
+      - ApiKeyAuth: []
       summary: StartRent
       tags:
       - Rent
@@ -521,7 +521,7 @@ paths:
       - application/json
       responses: {}
       security:
-      - ApKeyAuth: []
+      - ApiKeyAuth: []
       summary: TranposrtHistory
       tags:
       - Rent
@@ -541,7 +541,7 @@ paths:
       - application/json
       responses: {}
       security:
-      - ApKeyAuth: []
+      - ApiKeyAuth: []
       summary: CreateTransport
       tags:
       - Transport
@@ -560,7 +560,7 @@ paths:
       - application/json
       responses: {}
       security:
-      - ApKeyAuth: []
+      - ApiKeyAuth: []
       summary: DeleteTransport
       tags:
       - Transport
@@ -578,7 +578,7 @@ paths:
       - application/json
       responses: {}
       security:
-      - ApKeyAuth: []
+      - ApiKeyAuth: []
       summary: TransportInformation
       tags:
       - Transport
@@ -602,7 +602,7 @@ paths:
       - application/json
       responses: {}
       security:
-      - ApKeyAuth: []
+      - ApiKeyAuth: []
       summary: UpdateTransport
       tags:
       - Transport
@@ -621,7 +621,7 @@ paths:
       - application/json
       responses: {}
       security:
-      - ApKeyAuth: []
+      - ApiKeyAuth: []
       summary: AdminGetTransportHitory
       tags:
       - Admin
@@ -634,7 +634,7 @@ paths:
       - application/json
       responses: {}
       security:
-      - ApKeyAuth: []
+      - ApiKeyAuth: []
       summary: AdminGetUserHistory
       tags:
       - Admin
